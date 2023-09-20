@@ -10,4 +10,8 @@ public class BinaryTreeNode {
 
 	public String value;
 
+	public BinaryTreeNode(String value) {
+		this.value = value;
+	}
+
 }
