@@ -14,9 +14,9 @@ public class Trie {
 		}
 	}
 
-	private boolean delete(TrieNode trieNode, String word, int index) {
+	private boolean delete(TrieNode parentNode, String word, int index) {
 		Character character = word.charAt(index);
-		TrieNode currentNode = trieNode.children.get(character);
+		TrieNode currentNode = parentNode.children.get(character);
 		boolean canThisNodeBeDeleted;
 		if (currentNode.children.size() > 1) {
 			delete(currentNode, word, index++);
@@ -27,7 +27,7 @@ public class Trie {
 				currentNode.endOfString = false;
 				return false;
 			} else {
-				currentNode.children.remove(character);
+				parentNode.children.remove(character);
 				return true;
 			}
 		}
@@ -36,8 +36,8 @@ public class Trie {
 			return false;
 		}
 		canThisNodeBeDeleted = delete(currentNode, word, index++);
-		if (canThisNodeBeDeleted) {
-			currentNode.children.remove(character);
+		if (canThisNodeBeDeleted == true) {
+			parentNode.children.remove(character);
 			return true;
 		} else {
 			return false;
